@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native';
 import ToDoList from '../components/ToDoList';
 import ToDoForm from '../components/ToDoForm';
 
-function App () {
+function App() {
   const [tasks, setTasks] = useState([
     'Do laundry',
     'Go to gym',
@@ -25,3 +25,4 @@ function App () {
 }
 
 export default App;
+
