@@ -1,8 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import tasksData from './data/tasks.json';
 
 function ToDoForm({ addTask }) {
   const [taskText, setTaskText] = useState('');
+  const [tasks, setTasks] = useState([]);
+
+
+  useEffect(() => {
+
+    setTasks(tasksData.tasks);
+  }, []);
+
+
+  const handleAddTask = () => {
+    addTask(taskText);
+    setTaskText('');
+  };
+
+  const handleRandomTask = () => {
+    if (tasks.length > 0) {
+      const randomIndex = Math.floor(Math.random() * tasks.length);
+      setTaskText(tasks[randomIndex]);
+    }
+  };
 
   return (
     <View style={styles.form}>
@@ -14,10 +35,11 @@ function ToDoForm({ addTask }) {
       />
       <Button
         title="Add Task"
-        onPress={() => {
-          addTask(taskText);
-          setTaskText(''); 
-        }}
+        onPress={handleAddTask}
+      />
+      <Button
+        title="Generate Random Task"
+        onPress={handleRandomTask}
       />
     </View>
   );
@@ -42,5 +64,6 @@ const styles = StyleSheet.create({
 });
 
 export default ToDoForm;
+
 
 
